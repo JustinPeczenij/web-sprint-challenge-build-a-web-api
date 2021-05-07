@@ -33,7 +33,6 @@ router.put('/:id',
     async (req, res, next) => {
         try {
             const updatedProject = await Projects.update(req.params.id, req._new)
-            console.log(updatedProject)
             res.status(200).json(updatedProject)
         } catch(err) {
             next(err)
@@ -42,8 +41,8 @@ router.put('/:id',
 
 router.delete('/:id', validateProjectId, async (req, res, next) => {
     try {
-        const deleted = await Projects.remove(req.params.id)
-        res.status(200).json(deleted)
+        await Projects.remove(req.params.id)
+        res.status(200).send('the requested resource was deleted')
     } catch(err) {
         next(err)
     }
